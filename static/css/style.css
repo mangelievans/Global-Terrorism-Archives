@@ -1,0 +1,100 @@
+:root {
+    color-scheme: light;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202b38;
+    background: #f7fafc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: #f7fafc;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/static/img/alqaeda 2.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.28;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.site-header,
+.page-container,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+.site-header {
+    min-height: 76px;
+    padding: 0 max(5%, calc((100% - 1120px) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: white;
+    background: #10243d;
+    border-bottom: 3px solid #2c8a9e;
+}
+
+.brand { display: inline-flex; align-items: center; gap: 11px; color: white; font-size: 1.1rem; font-weight: 700; text-decoration: none; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #5cb8c0; border-radius: 9px; color: #b7eef0; font-size: 1rem; }
+.header-note { color: #cbd5e1; font-size: .9rem; }
+.page-container { width: min(1000px, 90%); margin: 0 auto; flex: 1; }
+.intro { padding: 56px 0 28px; }
+.eyebrow { color: #176b87; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+h1 { margin: 8px 0; color: #172b4d; font-size: clamp(2rem, 5vw, 3rem); }
+.intro-copy { color: #536273; font-size: 1.05rem; }
+.scope-indicator { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 7px 11px; border: 1px solid #b7d9de; border-radius: 999px; color: #245c65; background: #eaf6f6; font-size: .82rem; font-weight: 700; }
+.scope-indicator span { width: 8px; height: 8px; border-radius: 50%; background: #228b74; }
+
+.search-form {
+    padding: 22px;
+    border: 1px solid #dce4eb;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 8px 24px rgb(23 43 77 / 6%);
+}
+
+.search-form label { display: block; margin-bottom: 9px; font-weight: 700; }
+.search-row { display: flex; gap: 10px; }
+.search-row input { flex: 1; min-width: 0; padding: 13px 14px; border: 1px solid #bbc7d2; border-radius: 7px; font: inherit; }
+.search-row input:focus { outline: 3px solid #b7e2ef; border-color: #176b87; }
+.search-row button { padding: 0 22px; border: 0; border-radius: 7px; color: white; background: #176b87; font: inherit; font-weight: 700; cursor: pointer; transition: background .15s ease; }
+.search-row button:hover { background: #10566d; }
+.search-help { margin: 10px 0 0; color: #657486; font-size: .85rem; }
+.results { padding: 30px 0 52px; }
+.results h2 { display: flex; align-items: center; gap: 10px; color: #172b4d; }
+.result-count { padding: 3px 9px; border-radius: 999px; color: #176b87; background: #dff3f8; font-size: .8rem; }
+.archive-note { padding: 12px 14px; border-left: 4px solid #92aabd; color: #4a5b6b; background: #edf2f6; font-size: .9rem; line-height: 1.55; }
+.source-status { padding: 12px 14px; border-left: 4px solid #176b87; color: #24465a; background: #e9f5f8; }
+.story-list { display: grid; gap: 14px; margin-top: 18px; }
+.story-card, .empty-state { padding: 20px; border: 1px solid #dce4eb; border-radius: 10px; background: white; box-shadow: 0 3px 12px rgb(23 43 77 / 3%); }
+.story-meta { display: flex; justify-content: space-between; gap: 12px; color: #657486; font-size: .85rem; }
+.story-card h3 { margin: 12px 0 8px; color: #172b4d; }
+.story-card p { line-height: 1.6; }
+.story-source { color: #536273; font-size: .9rem; }
+.people-mentioned { margin: 12px 0; padding: 11px 13px; border-left: 3px solid #2c8a9e; color: #34495c; background: #f0f7f8; font-size: .9rem; }
+.people-mentioned ul { display: flex; flex-wrap: wrap; gap: 7px; margin: 8px 0 0; padding: 0; list-style: none; }
+.people-mentioned li { padding: 4px 9px; border: 1px solid #c8dfe2; border-radius: 999px; color: #245c65; background: white; }
+.people-note { display: block; margin-top: 8px; color: #657486; font-size: .8rem; }
+.story-card a { color: #12627c; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.empty-state { margin-top: 18px; }
+.site-footer { padding: 18px 7%; color: #d4deea; background: #10243d; text-align: center; font-size: .85rem; }
+.site-footer p { max-width: 900px; margin: 0 auto; line-height: 1.5; }
+
+@media (max-width: 560px) {
+    .site-header { padding: 16px 5%; align-items: flex-start; flex-direction: column; gap: 6px; }
+    .intro { padding-top: 38px; }
+    .search-row { flex-direction: column; }
+    .search-row button { min-height: 44px; }
+    .story-meta { flex-direction: column; gap: 4px; }
+}

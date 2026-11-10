@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Global terrorism archive{% endblock %}
+
+{% block content %}
+<section class="intro">
+    <p class="eyebrow">International reporting archive</p>
+    <h1>Global terrorism archive</h1>
+    <p class="intro-copy">Search worldwide reporting on terrorism incidents, organizations, policy, and counter-terrorism.</p>
+    <span class="scope-indicator"><span aria-hidden="true"></span> Scope: global terrorism reporting</span>
+</section>
+
+<form class="search-form" action="{{ url_for('home') }}" method="get" role="search">
+    <label for="query">Search the archive</label>
+    <div class="search-row">
+        <input id="query" name="q" type="search" maxlength="100"
+               placeholder="Country, location, event, or organization"
+               value="{{ query }}">
+        <button type="submit">Search archive</button>
+    </div>
+    <p class="search-help">Searches remain focused on global terrorism reporting. Leave the field blank for recent coverage.</p>
+</form>
+
+<section class="results" aria-live="polite" data-refresh-url="{{ url_for('live_stories') }}">
+    {% if query %}<h2>Results for “{{ query }}” <span class="result-count" id="result-count">{{ stories|length }}</span></h2>{% else %}<h2>Recent global terrorism reporting <span class="result-count" id="result-count">{{ stories|length }}</span></h2>{% endif %}
+
+    
+    <p class="archive-note">Records contain article metadata and link to their publishers. Results are limited to terrorism-focused searches; availability and geographic coverage depend on the monitored news sources.</p>
+
+    {% if stories %}
+        <div class="story-list" id="story-list">
+            {% for story in stories %}
+                <article class="story-card">
+                    <div class="story-meta">
+                        <span>{{ story.source }}</span>
+                        <span>{{ story.published_at or "Publication date unavailable" }}</span>
+                    </div>
+                    <h3>{{ story.title }}</h3>
+                    {% if story.people %}
+                        <div class="people-mentioned">
+                            <strong>People mentioned in report</strong>
+                            <ul>
+                                {% for person in story.people %}
+                                    <li>{{ person }}</li>
+                                {% endfor %}
+                            </ul>
+                            <span class="people-note">Names are surfaced from provider data or role-labeled headlines; review the linked report for context.</span>
+                        </div>
+                    {% endif %}
+                    {% if story.language %}<p class="story-source">Language: {{ story.language }}</p>{% endif %}
+                    <a href="{{ story.url }}" target="_blank" rel="noopener noreferrer">View source report <span aria-hidden="true">↗</span></a>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state" id="story-list">
+            <h3>No matching stories</h3>
+            <p>Try another keyword. If no matching articles are available from the news source, results may be empty.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Search a global archive of sourced terrorism reporting from monitored international news sources.">
+    <title>{% block title %}Global terrorism archive{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/live-updates.js') }}" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('home') }}">
+            <span class="brand-mark" aria-hidden="true">G</span>
+            <span>Global terrorism archive</span>
+        </a>
+        <span class="header-note">Global reporting intelligence</span>
+    </header>
+
+    <main class="page-container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>Copyright&copy;2026 | Global terorism archive.</p>
+    </footer>
+</body>
+</html>
