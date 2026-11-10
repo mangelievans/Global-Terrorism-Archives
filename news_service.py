@@ -155,17 +155,6 @@ def fetch_from_google_news(query):
 def search_news(query):
     initialize_database()
     normalized_query = normalize_query(query)
-    gdelt_error = None
-    try:
-        stories = fetch_from_gdelt(normalized_query)
-    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, ValueError) as error:
-        gdelt_error = error
-        stories = []
-
-    if stories:
-        save_stories(stories)
-        return stories, "Live terrorism-related results from GDELT are shown below."
-
     google_error = None
     try:
         stories = fetch_from_google_news(normalized_query)
@@ -175,7 +164,18 @@ def search_news(query):
 
     if stories:
         save_stories(stories)
-        return stories, "No GDELT matches were available. Showing terrorism-related results from Google News."
+        return stories, "Live terrorism-related results from Google News are shown below."
+
+    gdelt_error = None
+    try:
+        stories = fetch_from_gdelt(normalized_query)
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, ValueError) as error:
+        gdelt_error = error
+        stories = []
+
+    if stories:
+        save_stories(stories)
+        return stories, "No Google News matches were available. Showing terrorism-related results from GDELT."
 
     cached = find_cached_stories(normalized_query)
     if cached:
@@ -188,3 +188,4 @@ def search_news(query):
     if gdelt_error or google_error:
         return [], "Live news sources could not be reached, and no matching saved articles are available."
     return [], "No matching terrorism-related reports were found. Try another location, event, or organization."
+
